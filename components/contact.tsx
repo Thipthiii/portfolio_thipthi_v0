@@ -12,6 +12,8 @@ export default function Contact() {
     message: "",
   })
 
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({
@@ -23,6 +25,19 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     window.location.href = `mailto:thipthishree@gmail.com?subject=From ${formData.name}&body=${formData.message}`
+
+    // Show thank you message
+    setIsSubmitted(true)
+    setFormData({
+      name: "",
+      email: "",
+      message: "",
+    })
+
+    // Reset thank you message after 5 seconds
+    setTimeout(() => {
+      setIsSubmitted(false)
+    }, 5000)
   }
 
   return (
@@ -35,6 +50,14 @@ export default function Contact() {
               Have a project or idea? Let's collaborate and create something amazing together!
             </p>
           </div>
+
+          {isSubmitted && (
+            <div className="p-6 bg-green-100 dark:bg-green-900/30 border-2 border-green-500 rounded-2xl text-center animate-bounce">
+              <p className="text-green-700 dark:text-green-300 font-bold text-lg">
+                Thank You! Your message has been sent successfully. We'll get back to you soon!
+              </p>
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
@@ -79,7 +102,7 @@ export default function Contact() {
             <Button
               type="submit"
               size="lg"
-              className="w-full rounded-2xl bg-gradient-to-r from-primary to-secondary text-white font-bold text-lg hover:shadow-lg transition-shadow"
+              className="w-full rounded-2xl bg-black text-white font-bold text-lg hover:bg-gray-800 transition-colors"
             >
               GET IN TOUCH
             </Button>
