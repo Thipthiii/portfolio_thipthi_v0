@@ -17,7 +17,6 @@ export default function Involvement() {
     },
     {
       name: "YUVA Club",
-      fullForm: "Youth for Unity and Values Association",
       description: "Contributing to youth development and community values.",
     },
   ]
@@ -41,7 +40,7 @@ export default function Involvement() {
                 <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
                   {club.name}
                 </h3>
-                <p className="text-sm text-muted-foreground italic">{club.fullForm}</p>
+                {club.fullForm && <p className="text-sm text-muted-foreground italic">{club.fullForm}</p>}
                 <p className="text-muted-foreground leading-relaxed">{club.description}</p>
               </div>
             </div>
